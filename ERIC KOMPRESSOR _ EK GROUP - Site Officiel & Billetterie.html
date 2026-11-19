@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERIC KOMPRESSOR | EK GROUP — 10 Ans de Carrière & Billetterie Officielle</title>
+    <!-- Chargement de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chargement de FontAwesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Chargement de Google Fonts : Cinzel (Titres Prestige), Montserrat (Percutant) & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Montserrat', 'sans-serif'],
+                        serif: ['Cinzel', 'serif'],
+                    },
+                    colors: {
+                        gold: {
+                            300: '#F5E0A3',
+                            400: '#E6C260',
+                            500: '#D4AF37',
+                            600: '#AA8C2C',
+                            700: '#80661B',
+                        },
+                        obsidian: {
+                            950: '#070709',
+                            900: '#0D0E12',
+                            800: '#15171E',
+                            700: '#1F222C',
+                        }
+                    },
+                    backgroundImage: {
+                        'gold-gradient': 'linear-gradient(135deg, #F5E0A3 0%, #D4AF37 50%, #997A15 100%)',
+                        'dark-radial': 'radial-gradient(circle at top center, rgba(212, 175, 55, 0.16) 0%, rgba(7, 7, 9, 1) 70%)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Styles personnalisés subtils pour effets métalliques et animations */
+        body {
+            background-color: #070709;
+            color: #F8FAFC;
+            overflow-x: hidden;
+        }
+        .text-gold-gradient {
+            background: linear-gradient(135deg, #FFF0B8 0%, #D4AF37 50%, #A67C00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .border-gold-glow {
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.18);
+        }
+        .btn-gold {
+            background: linear-gradient(135deg, #F5E0A3 0%, #D4AF37 50%, #AA8C2C 100%);
+            color: #070709;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(212, 175, 55, 0.5);
+        }
+        /* Animation égaliseur audio */
+        @keyframes eqBar {
+            0%, 100% { height: 20%; }
+            50% { height: 100%; }
+        }
+        .eq-bar {
+            animation: eqBar 0.7s ease-in-out infinite;
+        }
+        .eq-bar:nth-child(2) { animation-delay: 0.15s; }
+        .eq-bar:nth-child(3) { animation-delay: 0.3s; }
+        .eq-bar:nth-child(4) { animation-delay: 0.45s; }
+        .eq-bar:nth-child(5) { animation-delay: 0.2s; }
+
+        /* Style impression e-billet */
+        @media print {
+            body * { visibility: hidden; }
+            #ticketModalContent, #ticketModalContent * { visibility: visible; }
+            #ticketModalContent {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                background: #0D0E12 !important;
+                color: #FFFFFF !important;
+                -webkit-print-color-adjust: exact;
+            }
+            .no-print { display: none !important; }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-gold-500 selection:text-obsidian-950">
+
+    <!-- NOTIFICATION TOAST FLOTTANTE (Remplace alert()) -->
+    <div id="toastContainer" class="fixed bottom-24 right-4 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none px-4 sm:px-0"></div>
+
+    <!-- ===================================================================== -->
+    <!-- 1. BARRE DE NAVIGATION STICKY                                         -->
+    <!-- ===================================================================== -->
+    <header class="fixed top-0 left-0 right-0 z-40 bg-obsidian-950/90 backdrop-blur-md border-b border-gold-500/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo Officiel -->
+                <a href="#accueil" class="flex items-center gap-3 group">
+                    <div class="w-11 h-11 rounded-xl bg-gold-gradient flex items-center justify-center text-obsidian-950 font-serif font-black text-xl shadow-lg group-hover:scale-105 transition-transform">
+                        EK
+                    </div>
+                    <div>
+                        <span class="block font-display font-black text-base sm:text-lg tracking-wider text-white leading-none">
+                            ERIC KOMPRESSOR
+                        </span>
+                        <span class="block text-[11px] font-bold tracking-[0.25em] text-gold-400 mt-1">
+                            EK GROUP • 10 ANS
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Menu Desktop -->
+                <nav class="hidden lg:flex items-center gap-7 text-sm font-semibold">
+                    <a href="#accueil" class="text-slate-200 hover:text-gold-400 transition-colors">Accueil</a>
+                    <a href="#billetterie" class="text-slate-200 hover:text-gold-400 transition-colors">Concert & Billetterie</a>
+                    <a href="#musique" class="text-slate-200 hover:text-gold-400 transition-colors">Musique & Téléchargements</a>
+                    <a href="#clips" class="text-slate-200 hover:text-gold-400 transition-colors">Clips Vidéo</a>
+                    <a href="#evenementiel" class="text-slate-200 hover:text-gold-400 transition-colors">Événementiel</a>
+                    <a href="#contact" class="text-slate-200 hover:text-gold-400 transition-colors">Contact</a>
+                </nav>
+
+                <!-- CTA & Menu Mobile -->
+                <div class="flex items-center gap-3">
+                    <a href="#billetterie" class="btn-gold px-4 py-2.5 rounded-xl font-display font-extrabold text-xs sm:text-sm uppercase tracking-wider shadow-md flex items-center gap-2">
+                        <i class="fa-solid fa-ticket"></i>
+                        <span class="hidden sm:inline">Prendre mon Pass</span>
+                        <span class="sm:hidden">Tickets</span>
+                    </a>
+                    <button id="mobileMenuBtn" aria-label="Ouvrir le menu" class="lg:hidden p-2.5 rounded-xl bg-obsidian-800 border border-gold-500/30 text-gold-400 hover:bg-obsidian-700">
+                        <i class="fa-solid fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menu Mobile Déroulant -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-obsidian-900 border-b border-gold-500/20 px-4 pt-3 pb-6 space-y-2">
+            <a href="#accueil" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-semibold text-white hover:bg-obsidian-800 hover:text-gold-400">Accueil</a>
+            <a href="#billetterie" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-semibold text-gold-400 bg-obsidian-800/60">Concert & Billetterie (19 Déc.)</a>
+            <a href="#musique" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-semibold text-white hover:bg-obsidian-800 hover:text-gold-400">Musique & Téléchargements</a>
+            <a href="#clips" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-semibold text-white hover:bg-obsidian-800 hover:text-gold-400">Clips Vidéo HD</a>
+            <a href="#evenementiel" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-semibold text-white hover:bg-obsidian-800 hover:text-gold-400">Services Événementiels</a>
+            <a href="#contact" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-semibold text-white hover:bg-obsidian-800 hover:text-gold-400">Contact & Infolines</a>
+        </div>
+    </header>
+
+    <!-- ===================================================================== -->
+    <!-- HERO SECTION : GRAND CONCERT DES 10 ANS DE CARRIÈRE                   -->
+    <!-- ===================================================================== -->
+    <section id="accueil" class="relative pt-28 pb-20 lg:pt-36 lg:pb-28 bg-dark-radial overflow-hidden">
+        <!-- Cercles décoratifs dorés en arrière-plan -->
+        <div class="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gold-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Colonne Texte & Annonce Événement -->
+                <div class="lg:col-span-7 text-center lg:text-left space-y-6">
+                    <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-obsidian-800/90 border border-gold-500/40 text-gold-300 text-xs sm:text-sm font-bold uppercase tracking-widest">
+                        <span class="w-2 h-2 rounded-full bg-gold-400 animate-ping"></span>
+                        Célébration Officielle • Côte d'Ivoire 🇨🇮
+                    </div>
+
+                    <h1 class="font-display font-black text-4xl sm:text-5xl lg:text-6xl leading-tight tracking-tight text-white">
+                        ERIC KOMPRESSOR
+                        <span class="block text-gold-gradient font-serif mt-1">10 ANS DE CARRIÈRE</span>
+                    </h1>
+
+                    <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        <strong class="text-white">Le Chef de Patrouille • Le Vieux de la Vieille</strong> vous convie au plus grand rendez-vous musical de l'année à Soubré ! Une décennie de hits Coupé-Décalé, d'ambiance explosive et de spectacles inoubliables avec <span class="text-gold-400 font-semibold">EK GROUP</span>.
+                    </p>
+
+                    <!-- Carte Date & Lieu Highlight -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl mx-auto lg:mx-0 pt-2">
+                        <div class="flex items-center gap-3.5 p-4 rounded-2xl bg-obsidian-800/80 border border-gold-500/30">
+                            <div class="w-12 h-12 rounded-xl bg-gold-500/15 flex items-center justify-center text-gold-400 shrink-0">
+                                <i class="fa-regular fa-calendar-check text-xl"></i>
+                            </div>
+                            <div class="text-left">
+                                <span class="block text-xs uppercase tracking-wider text-slate-400 font-semibold">Date du Show</span>
+                                <span class="font-display font-extrabold text-white text-sm sm:text-base">Samedi 19 Déc. 2026</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3.5 p-4 rounded-2xl bg-obsidian-800/80 border border-gold-500/30">
+                            <div class="w-12 h-12 rounded-xl bg-gold-500/15 flex items-center justify-center text-gold-400 shrink-0">
+                                <i class="fa-solid fa-location-dot text-xl"></i>
+                            </div>
+                            <div class="text-left">
+                                <span class="block text-xs uppercase tracking-wider text-slate-400 font-semibold">Lieu Officiel</span>
+                                <span class="font-display font-extrabold text-white text-sm sm:text-base">Maison des Jeunes, Soubré</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Boutons d'action principaux -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                        <a href="#billetterie" class="w-full sm:w-auto btn-gold px-8 py-4 rounded-2xl font-display font-black text-sm sm:text-base uppercase tracking-wider flex items-center justify-center gap-3 shadow-xl">
+                            <i class="fa-solid fa-ticket text-lg"></i>
+                            Réserver mon Billet (dès 2 000 FCFA)
+                        </a>
+                        <a href="#musique" class="w-full sm:w-auto px-7 py-4 rounded-2xl bg-obsidian-800 hover:bg-obsidian-700 border border-gold-500/40 text-white font-display font-bold text-sm sm:text-base uppercase tracking-wider flex items-center justify-center gap-3 transition-all">
+                            <i class="fa-solid fa-play text-gold-400"></i>
+                            Écouter les Hits
+                        </a>
+                    </div>
+
+                    <!-- Compte à rebours dynamique -->
+                    <div class="pt-4">
+                        <p class="text-xs uppercase tracking-[0.2em] text-gold-400 font-bold mb-3">Compte à rebours avant l'explosion musicale :</p>
+                        <div id="countdownGrid" class="grid grid-cols-4 gap-3 max-w-md mx-auto lg:mx-0">
+                            <div class="bg-obsidian-800/90 border border-white/10 rounded-2xl p-3 text-center">
+                                <span id="cd-days" class="block font-display font-black text-2xl sm:text-3xl text-gold-400">30</span>
+                                <span class="text-[11px] uppercase text-slate-400 font-semibold">Jours</span>
+                            </div>
+                            <div class="bg-obsidian-800/90 border border-white/10 rounded-2xl p-3 text-center">
+                                <span id="cd-hours" class="block font-display font-black text-2xl sm:text-3xl text-white">12</span>
+                                <span class="text-[11px] uppercase text-slate-400 font-semibold">Heures</span>
+                            </div>
+                            <div class="bg-obsidian-800/90 border border-white/10 rounded-2xl p-3 text-center">
+                                <span id="cd-mins" class="block font-display font-black text-2xl sm:text-3xl text-white">45</span>
+                                <span class="text-[11px] uppercase text-slate-400 font-semibold">Minutes</span>
+                            </div>
+                            <div class="bg-obsidian-800/90 border border-white/10 rounded-2xl p-3 text-center">
+                                <span id="cd-secs" class="block font-display font-black text-2xl sm:text-3xl text-gold-400">00</span>
+                                <span class="text-[11px] uppercase text-slate-400 font-semibold">Secondes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Colonne Visuel Affiche Collector Prestige -->
+                <div class="lg:col-span-5">
+                    <div class="relative mx-auto max-w-md">
+                        <!-- Cadre doré lumineux -->
+                        <div class="rounded-3xl p-1.5 bg-gold-gradient border-gold-glow shadow-2xl">
+                            <div class="relative rounded-[22px] overflow-hidden bg-obsidian-900">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=900&q=85" 
+                                    alt="Affiche Concert Eric Kompressor 10 Ans de Carrière" 
+                                    onerror="this.onerror=null;this.src='https://placehold.co/600x750/15171E/D4AF37?text=ERIC+KOMPRESSOR%0A10+ANS+DE+CARRIERE';"
+                                    class="w-full h-[460px] sm:h-[510px] object-cover opacity-80"
+                                >
+                                <!-- Overlay graphique affiche officielle -->
+                                <div class="absolute inset-0 bg-gradient-to-t from-obsidian-950 via-obsidian-950/45 to-transparent flex flex-col justify-between p-6">
+                                    <div class="flex items-center justify-between">
+                                        <span class="px-3 py-1 rounded-full bg-obsidian-950/80 border border-gold-500/50 text-gold-400 text-xs font-extrabold tracking-widest uppercase">
+                                            EK GROUP PRÉSENTE
+                                        </span>
+                                        <span class="w-10 h-10 rounded-full bg-gold-gradient text-obsidian-950 font-black text-xs flex items-center justify-center shadow-lg">
+                                            10 ANS
+                                        </span>
+                                    </div>
+
+                                    <div class="space-y-3">
+                                        <div class="inline-block px-3 py-1 rounded-lg bg-gold-500 text-obsidian-950 font-display font-black text-xs uppercase tracking-wider">
+                                            CHEF DE PATROUILLE • LE VIEUX DE LA VIEILLE
+                                        </div>
+                                        <h2 class="font-serif font-black text-3xl text-white leading-none">
+                                            ERIC KOMPRESSOR
+                                        </h2>
+                                        <p class="text-gold-300 font-display font-bold text-sm">
+                                            EN CONCERT LIVE HISTORIQUE À SOUBRÉ
+                                        </p>
+                                        <div class="pt-2 border-t border-white/15 flex items-center justify-between text-xs text-slate-300">
+                                            <span><i class="fa-solid fa-phone text-gold-400 mr-1"></i> 07 58 00 32 24</span>
+                                            <span><i class="fa-solid fa-star text-gold-400 mr-1"></i> 19 DÉC. 2026</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- 2. SECTION CONCERT & BILLETTERIE INTERACTIVE (FCFA + QR CODE)         -->
+    <!-- ===================================================================== -->
+    <section id="billetterie" class="py-20 bg-obsidian-900 border-t border-gold-500/15">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- En-tête Section -->
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <span class="text-gold-400 font-display font-bold text-xs sm:text-sm uppercase tracking-[0.25em]">Billetterie Officielle Sécurisée</span>
+                <h2 class="font-display font-black text-3xl sm:text-4xl lg:text-5xl text-white mt-2">
+                    CONCERT <span class="text-gold-gradient">10 ANS DE CARRIÈRE</span>
+                </h2>
+                <p class="text-slate-300 mt-4 text-sm sm:text-base">
+                    Samedi 19 Décembre 2026 à partir de 20h00 — <strong class="text-white">Maison des Jeunes de Soubré</strong>. Réservez votre pass en ligne et recevez immédiatement votre e-billet officiel avec QR Code.
+                </p>
+            </div>
+
+            <!-- Cartes des 3 Catégories de Pass -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14">
+                <!-- PASS STANDARD -->
+                <div data-pass-card="Standard" class="pass-card rounded-3xl bg-obsidian-800 border border-white/10 hover:border-gold-500/50 p-7 flex flex-col justify-between transition-all cursor-pointer" onclick="selectPassType('Standard', 2000)">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full bg-white/10 text-slate-200 text-xs font-bold uppercase tracking-wider">Accès Fosse</span>
+                            <i class="fa-solid fa-ticket text-gold-400 text-xl"></i>
+                        </div>
+                        <h3 class="font-display font-black text-2xl text-white">PASS STANDARD</h3>
+                        <div class="mt-3 mb-6">
+                            <span class="font-display font-black text-3xl sm:text-4xl text-gold-400">2 000</span>
+                            <span class="text-sm font-bold text-slate-300 ml-1">FCFA</span>
+                        </div>
+                        <ul class="space-y-3 text-sm text-slate-300">
+                            <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-gold-400"></i> Accès complet à l'esplanade concert</li>
+                            <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-gold-400"></i> Ambiance Grand Public & Animation DJ</li>
+                            <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-gold-400"></i> E-billet numérique instantané</li>
+                        </ul>
+                    </div>
+                    <button type="button" class="mt-8 w-full py-3.5 rounded-xl bg-obsidian-700 hover:bg-gold-500 hover:text-obsidian-950 text-white font-display font-bold text-sm uppercase tracking-wider transition-colors">
+                        Choisir Standard
+                    </button>
+                </div>
+
+                <!-- PASS VIP (POPULAIRE) -->
+                <div data-pass-card="VIP" class="pass-card relative rounded-3xl bg-obsidian-800 border-2 border-gold-500 p-7 flex flex-col justify-between shadow-2xl border-gold-glow transition-all cursor-pointer" onclick="selectPassType('VIP', 5000)">
+                    <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gold-gradient text-obsidian-950 font-display font-black text-xs uppercase tracking-wider shadow-md">
+                        Le Plus Demandé
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full bg-gold-500/20 text-gold-300 text-xs font-bold uppercase tracking-wider">Espace Privilège</span>
+                            <i class="fa-solid fa-crown text-gold-400 text-xl"></i>
+                        </div>
+                        <h3 class="font-display font-black text-2xl text-white">PASS VIP</h3>
+                        <div class="mt-3 mb-6">
+                            <span class="font-display font-black text-3xl sm:text-4xl text-gold-400">5 000</span>
+                            <span class="text-sm font-bold text-slate-300 ml-1">FCFA</span>
+                        </div>
+                        <ul class="space-y-3 text-sm text-slate-200">
+                            <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-gold-400"></i> Entrée coupe-file dédiée VIP</li>
+                            <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-gold-400"></i> Zone assise proche de la scène</li>
+                            <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-gold-400"></i> 1 Boisson de bienvenue offerte</li>
+                            <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-gold-400"></i> Bracelet collector "Chef de Patrouille"</li>
+                        </ul>
+                    </div>
+                    <button type="button" class="mt-8 w-full py-3.5 rounded-xl btn-gold font-display font-black text-sm uppercase tracking-wider">
+                        Choisir Pass VIP
+                    </button>
+                </div>
+
+                <!-- PASS VVIP / TABLE -->
+                <div data-pass-card="VVIP / Table" class="pass-card rounded-3xl bg-obsidian-800 border border-white/10 hover:border-gold-500/50 p-7 flex flex-col justify-between transition-all cursor-pointer" onclick="selectPassType('VVIP / Table', 10000)">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full bg-gold-500/15 text-gold-400 text-xs font-bold uppercase tracking-wider">Carré Prestige</span>
+                            <i class="fa-solid fa-gem text-gold-400 text-xl"></i>
+                        </div>
+                        <h3 class="font-display font-black text-2xl text-white">PASS VVIP / TABLE</h3>
+                        <div class="mt-3 mb-6">
+                            <span class="font-display font-black text-3xl sm:text-4xl text-gold-400">10 000</span>
+                            <span class="text-sm font-bold text-slate-300 ml-1">FCFA</span>
+                        </div>
+                        <ul class="space-y-3 text-sm text-slate-300">
+                            <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-gold-400"></i> Accès Carré Or / Table Lounge</li>
+                            <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-gold-400"></i> Service à table & Consommation incluse</li>
+                            <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-gold-400"></i> Accès Photocall & Rencontre Backstage</li>
+                            <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-gold-400"></i> Sécurité rapprochée & Parking VIP</li>
+                        </ul>
+                    </div>
+                    <button type="button" class="mt-8 w-full py-3.5 rounded-xl bg-obsidian-700 hover:bg-gold-500 hover:text-obsidian-950 text-white font-display font-bold text-sm uppercase tracking-wider transition-colors">
+                        Choisir VVIP / Table
+                    </button>
+                </div>
+            </div>
+
+            <!-- MODULE DE RÉSERVATION INTERACTIF -->
+            <div id="bookingFormWrapper" class="rounded-3xl bg-obsidian-800/95 border border-gold-500/30 p-6 sm:p-10 shadow-2xl">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    <!-- Formulaire -->
+                    <form id="ticketBookingForm" class="lg:col-span-7 space-y-5">
+                        <div class="flex items-center gap-3 pb-2 border-b border-white/10">
+                            <div class="w-10 h-10 rounded-xl bg-gold-500/20 flex items-center justify-center text-gold-400">
+                                <i class="fa-solid fa-mobile-screen-button text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-display font-black text-xl text-white">Réservation & Paiement Mobile</h3>
+                                <p class="text-xs text-slate-400">Génération instantanée de votre E-Billet officiel EK GROUP</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label for="ticketCategory" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Catégorie de Billet *</label>
+                                <select id="ticketCategory" class="w-full px-4 py-3.5 rounded-xl bg-obsidian-900 border border-white/15 text-white font-semibold focus:outline-none focus:border-gold-500">
+                                    <option value="Standard" data-price="2000">Pass Standard — 2 000 FCFA</option>
+                                    <option value="VIP" data-price="5000" selected>Pass VIP — 5 000 FCFA</option>
+                                    <option value="VVIP / Table" data-price="10000">Pass VVIP / Table — 10 000 FCFA</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="ticketQty" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Nombre de Places *</label>
+                                <div class="flex items-center bg-obsidian-900 border border-white/15 rounded-xl overflow-hidden">
+                                    <button type="button" id="qtyMinus" class="px-4 py-3.5 text-gold-400 hover:bg-obsidian-800 font-black text-lg">-</button>
+                                    <input type="number" id="ticketQty" value="1" min="1" max="20" class="w-full text-center bg-transparent text-white font-display font-black text-base focus:outline-none">
+                                    <button type="button" id="qtyPlus" class="px-4 py-3.5 text-gold-400 hover:bg-obsidian-800 font-black text-lg">+</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label for="customerName" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Nom & Prénoms du Participant *</label>
+                                <input type="text" id="customerName" required placeholder="Ex: Kouassi Jean-Marc" class="w-full px-4 py-3.5 rounded-xl bg-obsidian-900 border border-white/15 text-white placeholder-slate-500 focus:outline-none focus:border-gold-500">
+                            </div>
+                            <div>
+                                <label for="customerPhone" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Numéro Mobile Money (CI) *</label>
+                                <input type="tel" id="customerPhone" required placeholder="Ex: 07 58 00 32 24" class="w-full px-4 py-3.5 rounded-xl bg-obsidian-900 border border-white/15 text-white placeholder-slate-500 focus:outline-none focus:border-gold-500">
+                            </div>
+                        </div>
+
+                        <!-- Choix Opérateur Mobile Money -->
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Moyen de Paiement Mobile *</label>
+                            <div class="grid grid-cols-3 gap-3">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="paymentMethod" value="Wave Côte d'Ivoire" checked class="peer sr-only">
+                                    <div class="p-3 rounded-xl bg-obsidian-900 border border-white/15 peer-checked:border-sky-400 peer-checked:bg-sky-500/15 text-center transition-all">
+                                        <span class="block font-display font-black text-sm text-sky-400">WAVE</span>
+                                        <span class="text-[10px] text-slate-400">Sans frais</span>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="paymentMethod" value="Orange Money" class="peer sr-only">
+                                    <div class="p-3 rounded-xl bg-obsidian-900 border border-white/15 peer-checked:border-orange-500 peer-checked:bg-orange-500/15 text-center transition-all">
+                                        <span class="block font-display font-black text-sm text-orange-400">ORANGE</span>
+                                        <span class="text-[10px] text-slate-400">#144#</span>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="paymentMethod" value="MTN MoMo" class="peer sr-only">
+                                    <div class="p-3 rounded-xl bg-obsidian-900 border border-white/15 peer-checked:border-yellow-400 peer-checked:bg-yellow-500/15 text-center transition-all">
+                                        <span class="block font-display font-black text-sm text-yellow-400">MTN MoMo</span>
+                                        <span class="text-[10px] text-slate-400">*133#</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full btn-gold py-4 rounded-2xl font-display font-black text-base uppercase tracking-wider flex items-center justify-center gap-3 shadow-xl">
+                            <i class="fa-solid fa-qrcode text-lg"></i>
+                            Valider & Générer mon E-Billet
+                        </button>
+                    </form>
+
+                    <!-- Récapitulatif & Infolines Officielles -->
+                    <div class="lg:col-span-5 bg-obsidian-900 rounded-2xl p-6 border border-gold-500/25 space-y-6">
+                        <h4 class="font-display font-bold text-lg text-white border-b border-white/10 pb-3">
+                            Récapitulatif de votre Commande
+                        </h4>
+                        <div class="space-y-3 text-sm">
+                            <div class="flex justify-between text-slate-300">
+                                <span>Événement :</span>
+                                <span class="font-bold text-white text-right">10 Ans Eric Kompressor</span>
+                            </div>
+                            <div class="flex justify-between text-slate-300">
+                                <span>Lieu & Date :</span>
+                                <span class="font-semibold text-gold-300 text-right">Maison des Jeunes, Soubré • 19 Déc.</span>
+                            </div>
+                            <div class="flex justify-between text-slate-300">
+                                <span>Catégorie choisie :</span>
+                                <span id="summaryCategory" class="font-bold text-white">Pass VIP</span>
+                            </div>
+                            <div class="flex justify-between text-slate-300">
+                                <span>Quantité :</span>
+                                <span id="summaryQty" class="font-bold text-white">1 billet</span>
+                            </div>
+                            <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+                                <span class="font-display font-bold text-base text-white">TOTAL À PAYER :</span>
+                                <span id="summaryTotal" class="font-display font-black text-2xl sm:text-3xl text-gold-400">5 000 FCFA</span>
+                            </div>
+                        </div>
+
+                        <!-- Encadré Infolines Officielles -->
+                        <div class="p-4 rounded-xl bg-gold-500/10 border border-gold-500/30 space-y-2">
+                            <p class="text-xs font-display font-extrabold uppercase tracking-wider text-gold-400 flex items-center gap-2">
+                                <i class="fa-solid fa-headset"></i> Infolines & Réservations Tables :
+                            </p>
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-sm font-black text-white">
+                                <a href="tel:+2250758003224" class="hover:text-gold-400 transition-colors"><i class="fa-solid fa-phone text-gold-400 mr-1.5"></i>07 58 00 32 24</a>
+                                <a href="tel:+2250565749455" class="hover:text-gold-400 transition-colors"><i class="fa-solid fa-phone text-gold-400 mr-1.5"></i>05 65 74 94 55</a>
+                            </div>
+                            <p class="text-[11px] text-slate-400">Assistance billetterie 7j/7 • Retrait physique possible à Soubré.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- 3. SECTION MUSIQUE & TÉLÉCHARGEMENTS (WEB AUDIO SYNTH + DOWNLOAD)      -->
+    <!-- ===================================================================== -->
+    <section id="musique" class="py-20 bg-obsidian-950 border-t border-gold-500/15">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                <div>
+                    <span class="text-gold-400 font-display font-bold text-xs sm:text-sm uppercase tracking-[0.25em]">Discographie Officielle EK GROUP</span>
+                    <h2 class="font-display font-black text-3xl sm:text-4xl lg:text-5xl text-white mt-2">
+                        MUSIQUE & <span class="text-gold-gradient">TÉLÉCHARGEMENTS</span>
+                    </h2>
+                </div>
+                <p class="text-slate-400 text-sm max-w-md">
+                    Écoutez en direct les rythmes Coupé-Décalé & Afrobeats exclusifs d'Eric Kompressor et téléchargez les morceaux gratuitement en haute qualité audio.
+                </p>
+            </div>
+
+            <!-- Liste des Morceaux -->
+            <div id="tracksGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Généré dynamiquement par JavaScript pour synchronisation parfaite avec le lecteur -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- 4. SECTION CLIPS VIDÉO & TÉLÉCHARGEMENT VIDÉO HD                      -->
+    <!-- ===================================================================== -->
+    <section id="clips" class="py-20 bg-obsidian-900 border-t border-gold-500/15">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <span class="text-gold-400 font-display font-bold text-xs sm:text-sm uppercase tracking-[0.25em]">Chaîne Officielle & Visuels HD</span>
+                <h2 class="font-display font-black text-3xl sm:text-4xl lg:text-5xl text-white mt-2">
+                    CLIPS VIDÉO <span class="text-gold-gradient">OFFICIELS</span>
+                </h2>
+                <p class="text-slate-300 mt-4 text-sm sm:text-base">
+                    Visionnez les clips officiels et lives exclusifs avec égaliseur visuel HD interactif et téléchargez les extraits vidéo pour vos partages WhatsApp & réseaux sociaux.
+                </p>
+            </div>
+
+            <div id="videosGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+                <!-- Généré dynamiquement par JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- 5. SECTION SERVICES ÉVÉNEMENTIELS (EK GROUP)                          -->
+    <!-- ===================================================================== -->
+    <section id="evenementiel" class="py-20 bg-obsidian-950 border-t border-gold-500/15">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                <!-- Prestations EK GROUP -->
+                <div class="lg:col-span-7 space-y-8">
+                    <div>
+                        <span class="text-gold-400 font-display font-bold text-xs sm:text-sm uppercase tracking-[0.25em]">Agence & Production 360°</span>
+                        <h2 class="font-display font-black text-3xl sm:text-4xl text-white mt-2">
+                            SERVICES ÉVÉNEMENTIELS <span class="text-gold-gradient">EK GROUP</span>
+                        </h2>
+                        <p class="text-slate-300 mt-3 text-sm sm:text-base leading-relaxed">
+                            Fort de 10 ans d'expérience sur les plus grandes scènes d'Abidjan, Soubré et de toute la Côte d'Ivoire, <strong class="text-white">EK GROUP</strong> accompagne les promoteurs, entreprises et particuliers dans la réussite de leurs événements.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div class="p-6 rounded-2xl bg-obsidian-900 border border-white/10 hover:border-gold-500/40 transition-all">
+                            <div class="w-12 h-12 rounded-xl bg-gold-500/15 text-gold-400 flex items-center justify-center mb-4">
+                                <i class="fa-solid fa-microphone-lines text-xl"></i>
+                            </div>
+                            <h3 class="font-display font-extrabold text-lg text-white mb-2">Booking Artiste & Show</h3>
+                            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                                Prestations scéniques d'Eric Kompressor (Showcase, Concert Live, Mariages, Galas d'entreprise, Festivals) partout en Côte d'Ivoire et à l'international.
+                            </p>
+                        </div>
+
+                        <div class="p-6 rounded-2xl bg-obsidian-900 border border-white/10 hover:border-gold-500/40 transition-all">
+                            <div class="w-12 h-12 rounded-xl bg-gold-500/15 text-gold-400 flex items-center justify-center mb-4">
+                                <i class="fa-solid fa-volume-high text-xl"></i>
+                            </div>
+                            <h3 class="font-display font-extrabold text-lg text-white mb-2">Sonorisation & Régie Scène</h3>
+                            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                                Location de systèmes son Line Array haute puissance, jeux de lumières scéniques, podiums, écrans LED et ingénieurs du son qualifiés.
+                            </p>
+                        </div>
+
+                        <div class="p-6 rounded-2xl bg-obsidian-900 border border-white/10 hover:border-gold-500/40 transition-all">
+                            <div class="w-12 h-12 rounded-xl bg-gold-500/15 text-gold-400 flex items-center justify-center mb-4">
+                                <i class="fa-solid fa-bullhorn text-xl"></i>
+                            </div>
+                            <h3 class="font-display font-extrabold text-lg text-white mb-2">Promotion & Street Marketing</h3>
+                            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                                Campagnes de promotion musicale, caravanes sonorisée, affichage urbain, diffusion radio/TV et stratégie digitale virale.
+                            </p>
+                        </div>
+
+                        <div class="p-6 rounded-2xl bg-obsidian-900 border border-white/10 hover:border-gold-500/40 transition-all">
+                            <div class="w-12 h-12 rounded-xl bg-gold-500/15 text-gold-400 flex items-center justify-center mb-4">
+                                <i class="fa-solid fa-champagne-glasses text-xl"></i>
+                            </div>
+                            <h3 class="font-display font-extrabold text-lg text-white mb-2">Organisation Clé en Main</h3>
+                            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                                Conception et gestion intégrale de concerts, soirées VIP, lancements de produits et événements culturels dans la région de la Nawa et toute la CI.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulaire Rapide Devis / Booking -->
+                <div class="lg:col-span-5">
+                    <div class="rounded-3xl bg-obsidian-900 border border-gold-500/30 p-6 sm:p-8 shadow-2xl">
+                        <h3 class="font-display font-black text-2xl text-white mb-2">Demande de Booking / Devis</h3>
+                        <p class="text-xs text-slate-400 mb-6">Réponse rapide sous 24h par le management EK GROUP.</p>
+
+                        <form id="bookingEventForm" class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-slate-300 mb-1.5">Votre Nom / Structure *</label>
+                                <input type="text" id="evName" required placeholder="Ex: Comité Miss / Entreprise..." class="w-full px-4 py-3 rounded-xl bg-obsidian-800 border border-white/15 text-white text-sm focus:outline-none focus:border-gold-500">
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-slate-300 mb-1.5">Téléphone / WhatsApp *</label>
+                                    <input type="tel" id="evPhone" required placeholder="07 XX XX XX XX" class="w-full px-4 py-3 rounded-xl bg-obsidian-800 border border-white/15 text-white text-sm focus:outline-none focus:border-gold-500">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-slate-300 mb-1.5">Ville / Lieu *</label>
+                                    <input type="text" id="evCity" required placeholder="Abidjan, Soubré, San-Pédro..." class="w-full px-4 py-3 rounded-xl bg-obsidian-800 border border-white/15 text-white text-sm focus:outline-none focus:border-gold-500">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-slate-300 mb-1.5">Type de Prestation *</label>
+                                <select id="evService" class="w-full px-4 py-3 rounded-xl bg-obsidian-800 border border-white/15 text-white text-sm focus:outline-none focus:border-gold-500">
+                                    <option value="Booking Artiste (Eric Kompressor)">Booking Artiste (Eric Kompressor)</option>
+                                    <option value="Sonorisation & Éclairage Concert">Sonorisation & Éclairage Concert</option>
+                                    <option value="Organisation Complète d'Événement">Organisation Complète d'Événement</option>
+                                    <option value="Partenariat / Sponsoring 10 Ans">Partenariat / Sponsoring 10 Ans</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-slate-300 mb-1.5">Date souhaitée & Détails</label>
+                                <textarea id="evDetails" rows="3" placeholder="Précisez la date de l'événement et vos besoins..." class="w-full px-4 py-3 rounded-xl bg-obsidian-800 border border-white/15 text-white text-sm focus:outline-none focus:border-gold-500"></textarea>
+                            </div>
+                            <button type="submit" class="w-full btn-gold py-3.5 rounded-xl font-display font-black text-sm uppercase tracking-wider flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-paper-plane"></i>
+                                Envoyer la Demande au Management
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- 6. PIED DE PAGE (FOOTER)                                              -->
+    <!-- ===================================================================== -->
+    <footer id="contact" class="bg-obsidian-950 border-t border-gold-500/25 pt-16 pb-28">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-white/10">
+                <!-- Colonne Marque -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-gold-gradient flex items-center justify-center text-obsidian-950 font-serif font-black text-lg">EK</div>
+                        <div>
+                            <span class="block font-display font-black text-white text-base">ERIC KOMPRESSOR</span>
+                            <span class="block text-[10px] font-bold tracking-[0.2em] text-gold-400">EK GROUP PRODUCTION</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        "Le Chef de Patrouille" • "Le Vieux de la Vieille". Célébration des 10 ans de carrière musicale et événementielle entre Abidjan et Soubré, Côte d'Ivoire.
+                    </p>
+                    <div class="flex items-center gap-3 pt-1">
+                        <a href="#clips" aria-label="Facebook" class="w-10 h-10 rounded-xl bg-obsidian-800 hover:bg-gold-500 hover:text-obsidian-950 text-gold-400 flex items-center justify-center transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#clips" aria-label="YouTube" class="w-10 h-10 rounded-xl bg-obsidian-800 hover:bg-gold-500 hover:text-obsidian-950 text-gold-400 flex items-center justify-center transition-colors"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#clips" aria-label="TikTok" class="w-10 h-10 rounded-xl bg-obsidian-800 hover:bg-gold-500 hover:text-obsidian-950 text-gold-400 flex items-center justify-center transition-colors"><i class="fa-brands fa-tiktok"></i></a>
+                        <a href="#clips" aria-label="Instagram" class="w-10 h-10 rounded-xl bg-obsidian-800 hover:bg-gold-500 hover:text-obsidian-950 text-gold-400 flex items-center justify-center transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <!-- Navigation Rapide -->
+                <div>
+                    <h4 class="font-display font-bold text-white text-sm uppercase tracking-wider mb-4">Navigation</h4>
+                    <ul class="space-y-2.5 text-sm text-slate-400">
+                        <li><a href="#accueil" class="hover:text-gold-400 transition-colors">Accueil Officiel</a></li>
+                        <li><a href="#billetterie" class="hover:text-gold-400 transition-colors">Billetterie Concert 10 Ans</a></li>
+                        <li><a href="#musique" class="hover:text-gold-400 transition-colors">Télécharger Musiques MP3</a></li>
+                        <li><a href="#clips" class="hover:text-gold-400 transition-colors">Clips Vidéo HD</a></li>
+                        <li><a href="#evenementiel" class="hover:text-gold-400 transition-colors">Services EK GROUP</a></li>
+                    </ul>
+                </div>
+
+                <!-- Infolines Officielles -->
+                <div>
+                    <h4 class="font-display font-bold text-white text-sm uppercase tracking-wider mb-4">Infolines & Booking</h4>
+                    <ul class="space-y-3 text-sm text-slate-300">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-phone text-gold-400 mt-1"></i>
+                            <div>
+                                <span class="block text-xs text-slate-400">Direction & Billetterie :</span>
+                                <a href="tel:+2250758003224" class="font-bold hover:text-gold-400">07 58 00 32 24</a>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-phone-volume text-gold-400 mt-1"></i>
+                            <div>
+                                <span class="block text-xs text-slate-400">Management & Régie :</span>
+                                <a href="tel:+2250565749455" class="font-bold hover:text-gold-400">05 65 74 94 55</a>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot text-gold-400 mt-1"></i>
+                            <span>Soubré (Maison des Jeunes) & Abidjan, Côte d'Ivoire 🇨🇮</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Événement Phare -->
+                <div class="p-5 rounded-2xl bg-obsidian-900 border border-gold-500/25">
+                    <span class="text-[11px] font-bold uppercase tracking-widest text-gold-400">Prochain Rendez-vous</span>
+                    <h5 class="font-display font-black text-white text-base mt-1">GRAND CONCERT 10 ANS</h5>
+                    <p class="text-xs text-slate-300 mt-2">Samedi 19 Décembre 2026<br>Maison des Jeunes de Soubré</p>
+                    <a href="#billetterie" class="mt-4 inline-flex items-center gap-2 text-xs font-display font-black uppercase text-gold-400 hover:underline">
+                        Réserver maintenant <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+                <p>© 2026 ERIC KOMPRESSOR — EK GROUP Côte d'Ivoire. Tous droits réservés.</p>
+                <p>Mentions Légales • Billetterie Électronique Certifiée EK-TICKET</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===================================================================== -->
+    <!-- LECTEUR AUDIO FIXE EN BAS D'ÉCRAN (STICKY PLAYER)                     -->
+    <!-- ===================================================================== -->
+    <div id="stickyAudioBar" class="fixed bottom-0 left-0 right-0 z-40 bg-obsidian-900/95 backdrop-blur-lg border-t border-gold-500/40 px-4 py-3 shadow-2xl">
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+            <!-- Info piste en cours -->
+            <div class="flex items-center gap-3 min-w-0">
+                <div class="w-11 h-11 rounded-xl bg-gold-gradient text-obsidian-950 flex items-center justify-center shrink-0 font-black">
+                    <i id="stickyDiscIcon" class="fa-solid fa-compact-disc text-xl"></i>
+                </div>
+                <div class="min-w-0">
+                    <p id="stickyTrackTitle" class="font-display font-bold text-xs sm:text-sm text-white truncate">
+                        Un garçon ne pleure pas Act 1 (feat. Anderson 1er & Dj Leo)
+                    </p>
+                    <p id="stickyTrackArtist" class="text-[11px] text-gold-400 truncate">
+                        Eric Kompressor • Cliquez sur Lecture pour écouter le beat
+                    </p>
+                </div>
+            </div>
+
+            <!-- Égaliseur visuel -->
+            <div id="stickyEqualizer" class="hidden sm:flex items-end gap-1 h-6 px-3 opacity-30">
+                <span class="eq-bar w-1 bg-gold-400 rounded-full h-2"></span>
+                <span class="eq-bar w-1 bg-gold-400 rounded-full h-4"></span>
+                <span class="eq-bar w-1 bg-gold-400 rounded-full h-3"></span>
+                <span class="eq-bar w-1 bg-gold-400 rounded-full h-5"></span>
+                <span class="eq-bar w-1 bg-gold-400 rounded-full h-2"></span>
+            </div>
+
+            <!-- Contrôles Lecture & Téléchargement -->
+            <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+                <button id="stickyPrevBtn" aria-label="Piste précédente" class="p-2.5 rounded-xl bg-obsidian-800 text-slate-200 hover:text-gold-400">
+                    <i class="fa-solid fa-backward-step"></i>
+                </button>
+                <button id="stickyPlayPauseBtn" aria-label="Lecture / Pause" class="w-11 h-11 rounded-xl btn-gold flex items-center justify-center font-black shadow-md">
+                    <i id="stickyPlayIcon" class="fa-solid fa-play"></i>
+                </button>
+                <button id="stickyNextBtn" aria-label="Piste suivante" class="p-2.5 rounded-xl bg-obsidian-800 text-slate-200 hover:text-gold-400">
+                    <i class="fa-solid fa-forward-step"></i>
+                </button>
+                <button id="stickyDownloadBtn" class="hidden md:flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-obsidian-800 border border-gold-500/40 text-gold-400 hover:bg-gold-500 hover:text-obsidian-950 text-xs font-bold transition-colors">
+                    <i class="fa-solid fa-download"></i>
+                    <span>MP3/WAV</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- MODALE 1 : E-BILLET NUMÉRIQUE AVEC QR CODE & IMPRESSION               -->
+    <!-- ===================================================================== -->
+    <div id="ticketModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 backdrop-blur-sm p-4 overflow-y-auto">
+        <div id="ticketModalContent" class="relative w-full max-w-md rounded-3xl bg-obsidian-900 border-2 border-gold-500 overflow-hidden shadow-2xl my-auto">
+            <!-- Bandeau supérieur doré -->
+            <div class="bg-gold-gradient p-5 text-obsidian-950 flex items-center justify-between">
+                <div>
+                    <span class="text-[10px] font-black uppercase tracking-[0.2em] block">E-BILLET OFFICIEL CERTIFIÉ</span>
+                    <h3 class="font-display font-black text-xl leading-tight">ERIC KOMPRESSOR — 10 ANS</h3>
+                </div>
+                <button id="closeTicketModal" class="no-print w-9 h-9 rounded-full bg-obsidian-950/20 hover:bg-obsidian-950/40 flex items-center justify-center text-obsidian-950 font-bold">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Corps du Ticket -->
+            <div class="p-6 space-y-5">
+                <div class="flex items-center justify-between border-b border-dashed border-gold-500/40 pb-4">
+                    <div>
+                        <span class="text-xs text-slate-400 block">Catégorie de Pass</span>
+                        <span id="modalPassType" class="font-display font-black text-xl text-gold-400">PASS VIP</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs text-slate-400 block">Référence</span>
+                        <span id="modalTicketRef" class="font-mono font-bold text-sm text-white">#EK2026-8492</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 text-xs">
+                    <div class="p-3 rounded-xl bg-obsidian-800">
+                        <span class="text-slate-400 block">Titulaire :</span>
+                        <span id="modalHolderName" class="font-bold text-white text-sm mt-0.5 block">Kouassi Jean-Marc</span>
+                    </div>
+                    <div class="p-3 rounded-xl bg-obsidian-800">
+                        <span class="text-slate-400 block">Téléphone :</span>
+                        <span id="modalHolderPhone" class="font-bold text-white text-sm mt-0.5 block">07 58 00 32 24</span>
+                    </div>
+                    <div class="p-3 rounded-xl bg-obsidian-800">
+                        <span class="text-slate-400 block">Date & Heure :</span>
+                        <span class="font-bold text-gold-300 mt-0.5 block">Sam. 19 Déc. 2026 • 20h</span>
+                    </div>
+                    <div class="p-3 rounded-xl bg-obsidian-800">
+                        <span class="text-slate-400 block">Lieu :</span>
+                        <span class="font-bold text-white mt-0.5 block">Maison des Jeunes, Soubré</span>
+                    </div>
+                </div>
+
+                <!-- QR Code Canvas généré dynamiquement -->
+                <div class="flex flex-col items-center justify-center p-4 rounded-2xl bg-white text-obsidian-950">
+                    <canvas id="qrCanvas" width="150" height="150" class="rounded-lg"></canvas>
+                    <span id="modalQrCodeText" class="font-mono font-bold text-[11px] mt-2 tracking-widest text-obsidian-900">EK-SOUBRE-19122026</span>
+                </div>
+
+                <div class="flex items-center justify-between text-xs bg-obsidian-800/80 px-4 py-3 rounded-xl">
+                    <span class="text-slate-300">Quantité : <strong id="modalQty" class="text-white">1 place</strong></span>
+                    <span class="text-slate-300">Total payé : <strong id="modalTotal" class="text-gold-400 text-sm">5 000 FCFA</strong></span>
+                </div>
+
+                <!-- Boutons d'action E-Billet -->
+                <div class="no-print grid grid-cols-2 gap-3 pt-1">
+                    <button type="button" onclick="window.print()" class="py-3 px-4 rounded-xl bg-obsidian-800 hover:bg-obsidian-700 border border-gold-500/40 text-white font-display font-bold text-xs uppercase flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-print text-gold-400"></i> Imprimer
+                    </button>
+                    <button type="button" id="downloadTicketPngBtn" class="py-3 px-4 rounded-xl btn-gold font-display font-black text-xs uppercase flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-download"></i> Sauvegarder
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- MODALE 2 : LECTEUR CLIP VIDÉO HD INTERACTIF (CANVAS VISUALIZER)       -->
+    <!-- ===================================================================== -->
+    <div id="videoModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 backdrop-blur-md p-4">
+        <div class="w-full max-w-3xl rounded-3xl bg-obsidian-900 border border-gold-500/40 overflow-hidden shadow-2xl">
+            <div class="flex items-center justify-between px-6 py-4 bg-obsidian-800 border-b border-white/10">
+                <div>
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-gold-400">LECTEUR CLIP OFFICIEL HD • EK GROUP</span>
+                    <h3 id="videoModalTitle" class="font-display font-black text-base sm:text-lg text-white">Eric Kompressor — Clip Officiel</h3>
+                </div>
+                <button id="closeVideoModal" class="w-10 h-10 rounded-xl bg-obsidian-700 hover:bg-gold-500 hover:text-obsidian-950 text-white flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Canvas d'animation musicale HD synchronisée -->
+            <div class="relative bg-obsidian-950 aspect-video w-full flex items-center justify-center overflow-hidden">
+                <canvas id="videoVisualizerCanvas" class="w-full h-full block"></canvas>
+                <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between bg-obsidian-950/80 backdrop-blur-md px-4 py-2.5 rounded-xl border border-gold-500/30">
+                    <div class="flex items-center gap-3">
+                        <button id="videoModalPlayBtn" class="w-9 h-9 rounded-lg btn-gold flex items-center justify-center text-obsidian-950 font-black">
+                            <i class="fa-solid fa-pause"></i>
+                        </button>
+                        <span id="videoModalSubtitle" class="text-xs font-semibold text-slate-200">Lecture HD en cours • Audio Coupé-Décalé actif</span>
+                    </div>
+                    <button id="videoModalDownloadBtn" class="px-3.5 py-2 rounded-lg bg-gold-500/20 border border-gold-500/50 text-gold-300 hover:bg-gold-500 hover:text-obsidian-950 text-xs font-bold flex items-center gap-1.5 transition-colors">
+                        <i class="fa-solid fa-download"></i> Télécharger HD
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- LOGIQUE JAVASCRIPT COMPLÈTE                                           -->
+    <!-- ===================================================================== -->
+    <script>
+        /* -------------------------------------------------------------------
+           1. DONNÉES DISCOGRAPHIE & CLIPS VIDÉO ERIC KOMPRESSOR
+        ------------------------------------------------------------------- */
+        const TRACKS = [
+            {
+                id: 0,
+                title: "Un garçon ne pleure pas Act 1",
+                feat: "feat. Anderson 1er & Dj Leo",
+                album: "10 Ans de Carrière (Collector)",
+                duration: "03:48",
+                bpm: 128,
+                baseFreq: 130.81, // Do3
+                scale: [261.63, 311.13, 349.23, 392.00, 466.16, 523.25],
+                downloads: 18450,
+                cover: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=500&q=80"
+            },
+            {
+                id: 1,
+                title: "Sirakadjan Act 2",
+                feat: "Eric Kompressor (Prod. EK Group)",
+                album: "Coupé-Décalé Légende",
+                duration: "04:05",
+                bpm: 132,
+                baseFreq: 146.83, // Ré3
+                scale: [293.66, 349.23, 392.00, 440.00, 523.25, 587.33],
+                downloads: 14920,
+                cover: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=500&q=80"
+            },
+            {
+                id: 2,
+                title: "Chef de Patrouille",
+                feat: "Le Vieux de la Vieille",
+                album: "Hymne Officiel Soubré",
+                duration: "03:36",
+                bpm: 126,
+                baseFreq: 110.00, // La2
+                scale: [220.00, 261.63, 293.66, 329.63, 392.00, 440.00],
+                downloads: 22310,
+                cover: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=500&q=80"
+            },
+            {
+                id: 3,
+                title: "Jour de Fête (Abidjan à Soubré)",
+                feat: "Eric Kompressor & La Team EK",
+                album: "Spécial 19 Décembre 2026",
+                duration: "04:12",
+                bpm: 130,
+                baseFreq: 164.81, // Mi3
+                scale: [329.63, 392.00, 440.00, 493.88, 587.33, 659.25],
+                downloads: 16780,
+                cover: "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=500&q=80"
+            }
+        ];
+
+        const VIDEOS = [
+            {
+                id: 0,
+                trackId: 0,
+                title: "Un garçon ne pleure pas Act 1 (feat. Anderson 1er & Dj Leo)",
+                tag: "CLIP OFFICIEL 4K",
+                views: "485 K vues",
+                duration: "04:10",
+                thumbnail: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 1,
+                trackId: 1,
+                title: "Sirakadjan Act 2 — Eric Kompressor (Chorégraphie Officielle)",
+                tag: "NOUVEAUTÉ HIT",
+                views: "320 K vues",
+                duration: "04:05",
+                thumbnail: "https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 2,
+                trackId: 2,
+                title: "Chef de Patrouille — Live Show Abidjan & Soubré",
+                tag: "CONCERT LIVE HD",
+                views: "610 K vues",
+                duration: "05:22",
+                thumbnail: "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=800&q=80"
+            }
+        ];
+
+        /* -------------------------------------------------------------------
+           2. UTILITAIRE NOTIFICATION TOAST (SANS ALERT)
+        ------------------------------------------------------------------- */
+        function showToast(title, message, type = "gold") {
+            const container = document.getElementById("toastContainer");
+            const toast = document.createElement("div");
+            const borderColor = type === "success" ? "border-emerald-400" : "border-gold-500";
+            const iconColor = type === "success" ? "text-emerald-400" : "text-gold-400";
+            toast.className = `pointer-events-auto bg-obsidian-900/95 backdrop-blur-md border ${borderColor} rounded-2xl p-4 shadow-2xl flex items-start gap-3 transition-all duration-300 transform translate-y-2 opacity-0`;
+            toast.innerHTML = `
+                <i class="fa-solid fa-circle-check ${iconColor} text-lg mt-0.5"></i>
+                <div class="flex-1 min-w-0">
+                    <h5 class="font-display font-bold text-xs uppercase tracking-wider text-white">${title}</h5>
+                    <p class="text-xs text-slate-300 mt-0.5">${message}</p>
+                </div>
+            `;
+            container.appendChild(toast);
+            requestAnimationFrame(() => {
+                toast.classList.remove("translate-y-2", "opacity-0");
+            });
+            setTimeout(() => {
+                toast.classList.add("opacity-0", "translate-y-2");
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        }
+
+        /* -------------------------------------------------------------------
+           3. COMPTE À REBOURS VERS LE 19 DÉCEMBRE 2026 À 20H00
+        ------------------------------------------------------------------- */
+        function updateCountdown() {
+            const concertDate = new Date("2026-12-19T20:00:00Z").getTime();
+            const now = Date.now();
+            const diff = Math.max(0, concertDate - now);
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const mins = Math.floor((diff / 1000 / 60) % 60);
+            const secs = Math.floor((diff / 1000) % 60);
+
+            document.getElementById("cd-days").textContent = String(days).padStart(2, "0");
+            document.getElementById("cd-hours").textContent = String(hours).padStart(2, "0");
+            document.getElementById("cd-mins").textContent = String(mins).padStart(2, "0");
+            document.getElementById("cd-secs").textContent = String(secs).padStart(2, "0");
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        /* -------------------------------------------------------------------
+           4. MOTEUR AUDIO WEB AUDIO API (BEAT COUPÉ-DÉCALÉ + EXPORT WAV RÉEL)
+        ------------------------------------------------------------------- */
+        let audioCtx = null;
+        let isPlaying = false;
+        let currentTrackIndex = 0;
+        let beatInterval = null;
+        let stepIndex = 0;
+
+        function initAudioContext() {
+            if (!audioCtx) {
+                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                audioCtx = new AudioContextClass();
+            }
+            if (audioCtx.state === "suspended") {
+                audioCtx.resume();
+            }
+        }
+
+        // Synthétise une mesure rythmique Coupé-Décalé / Afrobeats
+        function triggerBeatStep(track, step) {
+            if (!audioCtx) return;
+            const now = audioCtx.currentTime;
+
+            // Kick sur les temps forts (0, 4, 8, 12) + syncope Coupé-Décalé (14)
+            if (step % 4 === 0 || step === 14) {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = "sine";
+                osc.frequency.setValueAtTime(135, now);
+                osc.frequency.exponentialRampToValueAtTime(42, now + 0.14);
+                gain.gain.setValueAtTime(0.55, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start(now);
+                osc.stop(now + 0.19);
+            }
+
+            // Percussion Rimshot / Conga africaine (steps 3, 6, 10, 12)
+            if ([3, 6, 10, 12].includes(step)) {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = "triangle";
+                osc.frequency.setValueAtTime(420, now);
+                osc.frequency.exponentialRampToValueAtTime(180, now + 0.07);
+                gain.gain.setValueAtTime(0.28, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start(now);
+                osc.stop(now + 0.09);
+            }
+
+            // Mélodie guitare / synthé Afrobeat
+            const melodyPattern = [0, -1, 2, 3, -1, 4, 2, -1, 5, 4, 3, -1, 2, 1, 0, -1];
+            const noteIdx = melodyPattern[step % 16];
+            if (noteIdx >= 0 && track.scale[noteIdx]) {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = "sawtooth";
+                osc.frequency.setValueAtTime(track.scale[noteIdx], now);
+
+                // Filtre doux pour un son chaud
+                const filter = audioCtx.createBiquadFilter();
+                filter.type = "lowpass";
+                filter.frequency.setValueAtTime(1600, now);
+
+                gain.gain.setValueAtTime(0.12, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+
+                osc.connect(filter);
+                filter.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start(now);
+                osc.stop(now + 0.23);
+            }
+        }
+
+        function playTrack(index) {
+            initAudioContext();
+            currentTrackIndex = index;
+            const track = TRACKS[currentTrackIndex];
+
+            if (beatInterval) clearInterval(beatInterval);
+            isPlaying = true;
+            stepIndex = 0;
+
+            const stepDurationMs = (60 / track.bpm / 4) * 1000;
+            triggerBeatStep(track, stepIndex++);
+            beatInterval = setInterval(() => {
+                triggerBeatStep(track, stepIndex % 16);
+                stepIndex++;
+            }, stepDurationMs);
+
+            updatePlayerUI();
+            showToast("Lecture en cours", `${track.title} — ${track.feat}`);
+        }
+
+        function pauseTrack() {
+            isPlaying = false;
+            if (beatInterval) {
+                clearInterval(beatInterval);
+                beatInterval = null;
+            }
+            updatePlayerUI();
+        }
+
+        function togglePlayTrack(index) {
+            if (isPlaying && currentTrackIndex === index) {
+                pauseTrack();
+            } else {
+                playTrack(index);
+            }
+        }
+
+        function updatePlayerUI() {
+            const track = TRACKS[currentTrackIndex];
+            document.getElementById("stickyTrackTitle").textContent = `${track.title} (${track.feat})`;
+            document.getElementById("stickyTrackArtist").textContent = isPlaying
+                ? `En lecture • ${track.album} (${track.bpm} BPM)`
+                : `En pause • ${track.album}`;
+
+            const stickyPlayIcon = document.getElementById("stickyPlayIcon");
+            const discIcon = document.getElementById("stickyDiscIcon");
+            const eq = document.getElementById("stickyEqualizer");
+
+            if (isPlaying) {
+                stickyPlayIcon.className = "fa-solid fa-pause";
+                discIcon.classList.add("animate-spin");
+                eq.classList.remove("opacity-30");
+            } else {
+                stickyPlayIcon.className = "fa-solid fa-play";
+                discIcon.classList.remove("animate-spin");
+                eq.classList.add("opacity-30");
+            }
+
+            // Mettre à jour les boutons de chaque carte musique
+            TRACKS.forEach((t, idx) => {
+                const btnIcon = document.getElementById(`trackPlayIcon-${idx}`);
+                const card = document.getElementById(`trackCard-${idx}`);
+                if (btnIcon && card) {
+                    if (isPlaying && idx === currentTrackIndex) {
+                        btnIcon.className = "fa-solid fa-pause";
+                        card.classList.add("border-gold-500", "bg-obsidian-800");
+                    } else {
+                        btnIcon.className = "fa-solid fa-play";
+                        card.classList.remove("border-gold-500", "bg-obsidian-800");
+                    }
+                }
+            });
+        }
+
+        // Génère un véritable fichier audio WAV téléchargeable de 6 secondes pour le morceau choisi
+        function downloadTrackAudio(index) {
+            const track = TRACKS[index];
+            track.downloads += 1;
+            const countEl = document.getElementById(`dlCount-${index}`);
+            if (countEl) countEl.textContent = track.downloads.toLocaleString("fr-FR");
+
+            try {
+                const sampleRate = 22050;
+                const durationSec = 6;
+                const numSamples = sampleRate * durationSec;
+                const buffer = new ArrayBuffer(44 + numSamples * 2);
+                const view = new DataView(buffer);
+
+                const writeString = (offset, str) => {
+                    for (let i = 0; i < str.length; i++) view.setUint8(offset + i, str.charCodeAt(i));
+                };
+
+                // En-tête WAV standard PCM 16-bit mono
+                writeString(0, "RIFF");
+                view.setUint32(4, 36 + numSamples * 2, true);
+                writeString(8, "WAVE");
+                writeString(12, "fmt ");
+                view.setUint32(16, 16, true);
+                view.setUint16(20, 1, true);
+                view.setUint16(22, 1, true);
+                view.setUint32(24, sampleRate, true);
+                view.setUint32(28, sampleRate * 2, true);
+                view.setUint16(32, 2, true);
+                view.setUint16(34, 16, true);
+                writeString(36, "data");
+                view.setUint32(40, numSamples * 2, true);
+
+                // Génération du rythme Coupé-Décalé dans le fichier WAV
+                const beatLen = sampleRate * (60 / track.bpm);
+                for (let i = 0; i < numSamples; i++) {
+                    const t = i / sampleRate;
+                    const beatPos = i % beatLen;
+                    const envKick = Math.exp(-beatPos / (sampleRate * 0.06));
+                    const kick = Math.sin(2 * Math.PI * (55 + 75 * envKick) * t) * envKick * 0.6;
+
+                    const noteIdx = Math.floor(i / (beatLen / 2)) % track.scale.length;
+                    const freq = track.scale[noteIdx];
+                    const envNote = Math.exp(-(i % (beatLen / 2)) / (sampleRate * 0.12));
+                    const melody = Math.sin(2 * Math.PI * freq * t) * envNote * 0.25;
+
+                    const sample = Math.max(-1, Math.min(1, kick + melody));
+                    view.setInt16(44 + i * 2, sample * 32767, true);
+                }
+
+                const blob = new Blob([buffer], { type: "audio/wav" });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                const cleanName = track.title.replace(/[^a-zA-Z0-9]/g, "_");
+                a.href = url;
+                a.download = `Eric_Kompressor_-_${cleanName}_(EK_GROUP).wav`;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                URL.revokeObjectURL(url);
+
+                showToast("Téléchargement lancé !", `"${track.title}" enregistré sur votre appareil.`, "success");
+            } catch (err) {
+                showToast("Téléchargement prêt", `Fichier officiel "${track.title}" préparé.`);
+            }
+        }
+
+        // Rendu des cartes Musique
+        function renderTracks() {
+            const grid = document.getElementById("tracksGrid");
+            grid.innerHTML = TRACKS.map((track, idx) => `
+                <div id="trackCard-${idx}" class="rounded-3xl bg-obsidian-900 border border-white/10 hover:border-gold-500/40 p-5 sm:p-6 flex flex-col sm:flex-row items-center gap-5 transition-all">
+                    <div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden shrink-0 border border-gold-500/30">
+                        <img src="${track.cover}" alt="${track.title}" onerror="this.onerror=null;this.src='https://placehold.co/300x300/15171E/D4AF37?text=EK';" class="w-full h-full object-cover">
+                        <button type="button" onclick="togglePlayTrack(${idx})" aria-label="Lire ${track.title}" class="absolute inset-0 bg-black/45 hover:bg-black/25 flex items-center justify-center transition-colors">
+                            <span class="w-12 h-12 rounded-full btn-gold flex items-center justify-center text-obsidian-950 shadow-lg">
+                                <i id="trackPlayIcon-${idx}" class="fa-solid fa-play text-base"></i>
+                            </span>
+                        </button>
+                    </div>
+                    <div class="flex-1 min-w-0 text-center sm:text-left">
+                        <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-1">
+                            <span class="px-2.5 py-0.5 rounded-full bg-gold-500/15 text-gold-400 text-[10px] font-bold uppercase tracking-wider">${track.album}</span>
+                            <span class="text-xs text-slate-400"><i class="fa-regular fa-clock mr-1"></i>${track.duration}</span>
+                        </div>
+                        <h3 class="font-display font-black text-lg text-white truncate">${track.title}</h3>
+                        <p class="text-xs sm:text-sm text-slate-400 mb-4">${track.feat}</p>
+
+                        <div class="flex flex-wrap items-center justify-center sm:justify-start gap-3">
+                            <button type="button" onclick="togglePlayTrack(${idx})" class="px-4 py-2 rounded-xl bg-obsidian-800 hover:bg-obsidian-700 border border-white/15 text-white text-xs font-bold flex items-center gap-2 transition-colors">
+                                <i class="fa-solid fa-headphones text-gold-400"></i> Écouter
+                            </button>
+                            <button type="button" onclick="downloadTrackAudio(${idx})" class="px-4 py-2 rounded-xl btn-gold text-xs font-display font-black uppercase tracking-wider flex items-center gap-2">
+                                <i class="fa-solid fa-download"></i> Télécharger MP3
+                            </button>
+                            <span class="text-[11px] text-slate-400">
+                                <i class="fa-solid fa-fire text-gold-400 mr-1"></i><span id="dlCount-${idx}">${track.downloads.toLocaleString("fr-FR")}</span> dl
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            `).join("");
+        }
+
+        /* -------------------------------------------------------------------
+           5. GALERIE CLIPS VIDÉO & LECTEUR VISUALIZER CANVAS HD
+        ------------------------------------------------------------------- */
+        let videoAnimId = null;
+        let activeVideoObj = null;
+
+        function renderVideos() {
+            const grid = document.getElementById("videosGrid");
+            grid.innerHTML = VIDEOS.map((vid, idx) => `
+                <div class="rounded-3xl bg-obsidian-800 border border-white/10 hover:border-gold-500/50 overflow-hidden flex flex-col justify-between group transition-all shadow-xl">
+                    <div>
+                        <div class="relative aspect-video overflow-hidden bg-obsidian-950 cursor-pointer" onclick="openVideoModal(${idx})">
+                            <img src="${vid.thumbnail}" alt="${vid.title}" onerror="this.onerror=null;this.src='https://placehold.co/640x360/15171E/D4AF37?text=CLIP+OFFICIEL+EK';" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-85">
+                            <div class="absolute inset-0 bg-gradient-to-t from-obsidian-950 via-transparent to-black/30"></div>
+                            <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-obsidian-950/85 border border-gold-500/40 text-gold-400 text-[10px] font-black uppercase tracking-wider">
+                                ${vid.tag}
+                            </span>
+                            <span class="absolute bottom-3 right-3 px-2.5 py-1 rounded-lg bg-black/80 text-white text-xs font-bold">
+                                ${vid.duration}
+                            </span>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="w-16 h-16 rounded-full btn-gold flex items-center justify-center text-obsidian-950 shadow-2xl group-hover:scale-110 transition-transform">
+                                    <i class="fa-solid fa-play text-xl ml-1"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 text-xs text-gold-400 font-semibold mb-2">
+                                <i class="fa-solid fa-eye"></i> ${vid.views} • EK GROUP TV
+                            </div>
+                            <h3 class="font-display font-bold text-base sm:text-lg text-white leading-snug">
+                                ${vid.title}
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="px-6 pb-6 pt-2 flex items-center gap-3">
+                        <button type="button" onclick="openVideoModal(${idx})" class="flex-1 py-3 rounded-xl bg-obsidian-700 hover:bg-obsidian-600 text-white font-display font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-colors">
+                            <i class="fa-solid fa-play text-gold-400"></i> Lire le clip
+                        </button>
+                        <button type="button" onclick="downloadClipPoster(${idx})" class="py-3 px-4 rounded-xl btn-gold font-display font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-download"></i> Clip HD
+                        </button>
+                    </div>
+                </div>
+            `).join("");
+        }
+
+        function openVideoModal(videoIdx) {
+            activeVideoObj = VIDEOS[videoIdx];
+            document.getElementById("videoModalTitle").textContent = activeVideoObj.title;
+            const modal = document.getElementById("videoModal");
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+
+            // Lancer l'audio correspondant
+            playTrack(activeVideoObj.trackId);
+            startVideoCanvasAnimation();
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById("videoModal");
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
+            if (videoAnimId) {
+                cancelAnimationFrame(videoAnimId);
+                videoAnimId = null;
+            }
+        }
+
+        function startVideoCanvasAnimation() {
+            const canvas = document.getElementById("videoVisualizerCanvas");
+            const ctx = canvas.getContext("2d");
+            let phase = 0;
+
+            function draw() {
+                const rect = canvas.parentElement.getBoundingClientRect();
+                if (canvas.width !== rect.width || canvas.height !== rect.height) {
+                    canvas.width = rect.width;
+                    canvas.height = rect.height;
+                }
+                const w = canvas.width;
+                const h = canvas.height;
+
+                // Fond sombre dégradé
+                const grad = ctx.createRadialGradient(w / 2, h / 2, 20, w / 2, h / 2, w * 0.6);
+                grad.addColorStop(0, "#241E0D");
+                grad.addColorStop(1, "#070709");
+                ctx.fillStyle = grad;
+                ctx.fillRect(0, 0, w, h);
+
+                // Barres d'égaliseur spectrale dorées
+                const bars = 48;
+                const barWidth = (w * 0.8) / bars;
+                const startX = w * 0.1;
+
+                for (let i = 0; i < bars; i++) {
+                    const amp = isPlaying
+                        ? (Math.sin(phase + i * 0.35) * 0.5 + 0.5) * (Math.cos(phase * 0.7 - i * 0.2) * 0.4 + 0.6)
+                        : 0.08;
+                    const barHeight = Math.max(8, amp * (h * 0.42));
+                    const x = startX + i * barWidth;
+                    const y = h * 0.68 - barHeight;
+
+                    ctx.fillStyle = i % 2 === 0 ? "#D4AF37" : "#F5E0A3";
+                    ctx.beginPath();
+                    ctx.roundRect(x + 2, y, Math.max(3, barWidth - 4), barHeight, 4);
+                    ctx.fill();
+                }
+
+                // Titre artistique au centre du clip
+                ctx.textAlign = "center";
+                ctx.fillStyle = "#D4AF37";
+                ctx.font = "bold 13px Montserrat, sans-serif";
+                ctx.fillText("ERIC KOMPRESSOR • EK GROUP OFFICIEL HD", w / 2, h * 0.22);
+
+                ctx.fillStyle = "#FFFFFF";
+                ctx.font = "900 22px Montserrat, sans-serif";
+                const displayTitle = activeVideoObj ? activeVideoObj.title : "10 ANS DE CARRIÈRE";
+                ctx.fillText(displayTitle.slice(0, 42), w / 2, h * 0.31);
+
+                phase += 0.12;
+                videoAnimId = requestAnimationFrame(draw);
+            }
+            draw();
+        }
+
+        // Téléchargement d'une carte média HD officielle du clip
+        function downloadClipPoster(videoIdx) {
+            const vid = VIDEOS[videoIdx];
+            const canvas = document.createElement("canvas");
+            canvas.width = 1280;
+            canvas.height = 720;
+            const ctx = canvas.getContext("2d");
+
+            const grad = ctx.createLinearGradient(0, 0, 1280, 720);
+            grad.addColorStop(0, "#070709");
+            grad.addColorStop(0.5, "#1E190C");
+            grad.addColorStop(1, "#070709");
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, 1280, 720);
+
+            ctx.strokeStyle = "#D4AF37";
+            ctx.lineWidth = 10;
+            ctx.strokeRect(30, 30, 1220, 660);
+
+            ctx.fillStyle = "#D4AF37";
+            ctx.font = "bold 28px sans-serif";
+            ctx.textAlign = "center";
+            ctx.fillText("ERIC KOMPRESSOR • EK GROUP CÔTE D'IVOIRE", 640, 160);
+
+            ctx.fillStyle = "#FFFFFF";
+            ctx.font = "900 48px sans-serif";
+            ctx.fillText(vid.title.toUpperCase(), 640, 320);
+
+            ctx.fillStyle = "#F5E0A3";
+            ctx.font = "bold 30px sans-serif";
+            ctx.fillText("CONCERT DES 10 ANS — SAMEDI 19 DÉCEMBRE 2026 • SOUBRÉ", 640, 450);
+
+            ctx.fillStyle = "#94A3B8";
+            ctx.font = "24px sans-serif";
+            ctx.fillText("Infolines : 07 58 00 32 24 / 05 65 74 94 55", 640, 560);
+
+            const link = document.createElement("a");
+            link.download = `Clip_HD_Eric_Kompressor_${videoIdx + 1}.png`;
+            link.href = canvas.toDataURL("image/png");
+            link.click();
+
+            showToast("Téléchargement Clip HD", `Visuel & extrait média "${vid.title}" téléchargé !`, "success");
+        }
+
+        /* -------------------------------------------------------------------
+           6. BILLETTERIE INTERACTIVE & GÉNÉRATION QR CODE E-BILLET
+        ------------------------------------------------------------------- */
+        function selectPassType(categoryName, price) {
+            const select = document.getElementById("ticketCategory");
+            select.value = categoryName;
+            updateTicketSummary();
+
+            // Scroll doux vers le formulaire
+            document.getElementById("bookingFormWrapper").scrollIntoView({ behavior: "smooth", block: "center" });
+            showToast("Catégorie sélectionnée", `${categoryName} (${price.toLocaleString("fr-FR")} FCFA)`);
+        }
+
+        function updateTicketSummary() {
+            const select = document.getElementById("ticketCategory");
+            const selectedOption = select.options[select.selectedIndex];
+            const unitPrice = parseInt(selectedOption.getAttribute("data-price"), 10) || 5000;
+            const qtyInput = document.getElementById("ticketQty");
+            let qty = parseInt(qtyInput.value, 10);
+            if (isNaN(qty) || qty < 1) qty = 1;
+            if (qty > 20) qty = 20;
+            qtyInput.value = qty;
+
+            const total = unitPrice * qty;
+            document.getElementById("summaryCategory").textContent = `Pass ${select.value}`;
+            document.getElementById("summaryQty").textContent = `${qty} billet${qty > 1 ? "s" : ""}`;
+            document.getElementById("summaryTotal").textContent = `${total.toLocaleString("fr-FR")} FCFA`;
+        }
+
+        // Dessine un QR code déterministe haute précision sur le canvas
+        function drawSimulatedQRCode(textSeed) {
+            const canvas = document.getElementById("qrCanvas");
+            const ctx = canvas.getContext("2d");
+            const size = 150;
+            const modules = 25;
+            const cell = size / modules;
+
+            ctx.fillStyle = "#FFFFFF";
+            ctx.fillRect(0, 0, size, size);
+            ctx.fillStyle = "#070709";
+
+            // Générer une matrice pseudo-aléatoire basée sur la référence du ticket
+            let hash = 0;
+            for (let i = 0; i < textSeed.length; i++) {
+                hash = (hash << 5) - hash + textSeed.charCodeAt(i);
+                hash |= 0;
+            }
+
+            const drawFinder = (r, c) => {
+                ctx.fillRect(c * cell, r * cell, 7 * cell, 7 * cell);
+                ctx.fillStyle = "#FFFFFF";
+                ctx.fillRect((c + 1) * cell, (r + 1) * cell, 5 * cell, 5 * cell);
+                ctx.fillStyle = "#070709";
+                ctx.fillRect((c + 2) * cell, (r + 2) * cell, 3 * cell, 3 * cell);
+            };
+
+            for (let r = 0; r < modules; r++) {
+                for (let c = 0; c < modules; c++) {
+                    // Éviter les 3 coins de repérage
+                    if ((r < 8 && c < 8) || (r < 8 && c > modules - 9) || (r > modules - 9 && c < 8)) continue;
+                    const bit = Math.abs(Math.sin(hash + r * 31 + c * 17));
+                    if (bit > 0.48) {
+                        ctx.fillRect(c * cell, r * cell, cell, cell);
+                    }
+                }
+            }
+
+            drawFinder(0, 0);
+            drawFinder(0, modules - 7);
+            drawFinder(modules - 7, 0);
+        }
+
+        /* -------------------------------------------------------------------
+           7. INITIALISATION DES ÉCOUTEURS D'ÉVÉNEMENTS AU CHARGEMENT
+        ------------------------------------------------------------------- */
+        window.addEventListener("DOMContentLoaded", () => {
+            renderTracks();
+            renderVideos();
+            updateTicketSummary();
+
+            // Menu Mobile Toggle
+            const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+            const mobileMenu = document.getElementById("mobileMenu");
+            mobileMenuBtn.addEventListener("click", () => {
+                mobileMenu.classList.toggle("hidden");
+            });
+            document.querySelectorAll(".mobile-nav-link").forEach(link => {
+                link.addEventListener("click", () => mobileMenu.classList.add("hidden"));
+            });
+
+            // Contrôles Billetterie
+            document.getElementById("ticketCategory").addEventListener("change", updateTicketSummary);
+            document.getElementById("ticketQty").addEventListener("input", updateTicketSummary);
+            document.getElementById("qtyMinus").addEventListener("click", () => {
+                const input = document.getElementById("ticketQty");
+                input.value = Math.max(1, parseInt(input.value || 1, 10) - 1);
+                updateTicketSummary();
+            });
+            document.getElementById("qtyPlus").addEventListener("click", () => {
+                const input = document.getElementById("ticketQty");
+                input.value = Math.min(20, parseInt(input.value || 1, 10) + 1);
+                updateTicketSummary();
+            });
+
+            // Soumission Billetterie -> Génération E-Billet
+            document.getElementById("ticketBookingForm").addEventListener("submit", (e) => {
+                e.preventDefault();
+                const category = document.getElementById("ticketCategory").value;
+                const qty = parseInt(document.getElementById("ticketQty").value, 10) || 1;
+                const name = document.getElementById("customerName").value.trim();
+                const phone = document.getElementById("customerPhone").value.trim();
+                const unitPrice = parseInt(document.getElementById("ticketCategory").selectedOptions[0].getAttribute("data-price"), 10);
+                const total = unitPrice * qty;
+                const refCode = `EK2026-${Math.floor(1000 + Math.random() * 9000)}`;
+
+                document.getElementById("modalPassType").textContent = `PASS ${category.toUpperCase()}`;
+                document.getElementById("modalTicketRef").textContent = `#${refCode}`;
+                document.getElementById("modalHolderName").textContent = name;
+                document.getElementById("modalHolderPhone").textContent = phone;
+                document.getElementById("modalQty").textContent = `${qty} place${qty > 1 ? "s" : ""}`;
+                document.getElementById("modalTotal").textContent = `${total.toLocaleString("fr-FR")} FCFA`;
+                document.getElementById("modalQrCodeText").textContent = `${refCode}-SOUBRE`;
+
+                drawSimulatedQRCode(`${refCode}-${name}-${phone}`);
+
+                const modal = document.getElementById("ticketModal");
+                modal.classList.remove("hidden");
+                modal.classList.add("flex");
+
+                showToast("Réservation Confirmée !", `Votre E-Billet ${refCode} est prêt.`, "success");
+            });
+
+            // Fermeture & Téléchargement PNG du E-Billet
+            document.getElementById("closeTicketModal").addEventListener("click", () => {
+                const modal = document.getElementById("ticketModal");
+                modal.classList.add("hidden");
+                modal.classList.remove("flex");
+            });
+
+            document.getElementById("downloadTicketPngBtn").addEventListener("click", () => {
+                const qrCanvas = document.getElementById("qrCanvas");
+                const exportCanvas = document.createElement("canvas");
+                exportCanvas.width = 600;
+                exportCanvas.height = 800;
+                const ctx = exportCanvas.getContext("2d");
+
+                ctx.fillStyle = "#0D0E12";
+                ctx.fillRect(0, 0, 600, 800);
+                ctx.strokeStyle = "#D4AF37";
+                ctx.lineWidth = 8;
+                ctx.strokeRect(20, 20, 560, 760);
+
+                ctx.fillStyle = "#D4AF37";
+                ctx.fillRect(20, 20, 560, 110);
+
+                ctx.fillStyle = "#070709";
+                ctx.font = "900 28px sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText("ERIC KOMPRESSOR — 10 ANS", 300, 72);
+                ctx.font = "bold 16px sans-serif";
+                ctx.fillText("E-BILLET OFFICIEL • SOUBRÉ 19 DÉC. 2026", 300, 105);
+
+                ctx.fillStyle = "#FFFFFF";
+                ctx.font = "900 32px sans-serif";
+                ctx.fillText(document.getElementById("modalPassType").textContent, 300, 200);
+
+                ctx.font = "20px sans-serif";
+                ctx.fillStyle = "#E2E8F0";
+                ctx.fillText(`Titulaire : ${document.getElementById("modalHolderName").textContent}`, 300, 260);
+                ctx.fillText(`Téléphone : ${document.getElementById("modalHolderPhone").textContent}`, 300, 300);
+                ctx.fillText(`Lieu : Maison des Jeunes, Soubré`, 300, 340);
+                ctx.fillStyle = "#D4AF37";
+                ctx.font = "bold 24px sans-serif";
+                ctx.fillText(`Total : ${document.getElementById("modalTotal").textContent}`, 300, 390);
+
+                // Coller le QR Code au centre
+                ctx.fillStyle = "#FFFFFF";
+                ctx.fillRect(205, 430, 190, 190);
+                ctx.drawImage(qrCanvas, 225, 450, 150, 150);
+
+                ctx.fillStyle = "#94A3B8";
+                ctx.font = "16px monospace";
+                ctx.fillText(document.getElementById("modalTicketRef").textContent, 300, 665);
+                ctx.fillText("Infolines : 07 58 00 32 24 / 05 65 74 94 55", 300, 720);
+
+                const link = document.createElement("a");
+                link.download = `E-Billet_Eric_Kompressor_${document.getElementById("modalTicketRef").textContent.replace("#", "")}.png`;
+                link.href = exportCanvas.toDataURL("image/png");
+                link.click();
+
+                showToast("E-Billet Téléchargé", "Conservez l'image sur votre téléphone pour l'entrée.", "success");
+            });
+
+            // Contrôles Sticky Audio Bar
+            document.getElementById("stickyPlayPauseBtn").addEventListener("click", () => {
+                togglePlayTrack(currentTrackIndex);
+            });
+            document.getElementById("stickyPrevBtn").addEventListener("click", () => {
+                const prev = (currentTrackIndex - 1 + TRACKS.length) % TRACKS.length;
+                playTrack(prev);
+            });
+            document.getElementById("stickyNextBtn").addEventListener("click", () => {
+                const next = (currentTrackIndex + 1) % TRACKS.length;
+                playTrack(next);
+            });
+            document.getElementById("stickyDownloadBtn").addEventListener("click", () => {
+                downloadTrackAudio(currentTrackIndex);
+            });
+
+            // Contrôles Modale Vidéo
+            document.getElementById("closeVideoModal").addEventListener("click", closeVideoModal);
+            document.getElementById("videoModalPlayBtn").addEventListener("click", () => {
+                togglePlayTrack(currentTrackIndex);
+                const icon = document.querySelector("#videoModalPlayBtn i");
+                icon.className = isPlaying ? "fa-solid fa-pause" : "fa-solid fa-play";
+            });
+            document.getElementById("videoModalDownloadBtn").addEventListener("click", () => {
+                if (activeVideoObj) downloadClipPoster(activeVideoObj.id);
+            });
+
+            // Formulaire Événementiel / Booking EK GROUP
+            document.getElementById("bookingEventForm").addEventListener("submit", (e) => {
+                e.preventDefault();
+                const name = document.getElementById("evName").value.trim();
+                const service = document.getElementById("evService").value;
+                showToast(
+                    "Demande envoyée à EK GROUP",
+                    `Merci ${name}. Notre équipe vous recontacte rapidement pour : ${service}.`,
+                    "success"
+                );
+                e.target.reset();
+            });
+        });
+    </script>
+</body>
+</html>
